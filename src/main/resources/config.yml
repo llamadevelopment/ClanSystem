@@ -1,0 +1,20 @@
+Provider: Yaml
+
+MySql:
+  Host: "127.0.0.1"
+  Port: "3306"
+  User: "root"
+  Database: "clansystem"
+  Password: "rofl"
+
+MongoDB:
+  Uri: "URI_LINK"
+  Database: "clansystem"
+
+Settings:
+  UsePlaceholder: false
+
+Commands:
+  Clan:
+    Name: "clan"
+    Description: "Join, create or manage a clan"

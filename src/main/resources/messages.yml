@@ -1,0 +1,102 @@
+# --- Messages ---
+
+prefix: "&8» &cClan &8| &7"
+no-permission: "&cYou have insufficient permissions to execute this command."
+
+name-or-tag-empty: "&cThe clan name or tag is empty."
+name-or-tag-too-long: "&cThe clan name or tag is too long."
+clan-name-already-exists: "&cThis clan name already exists."
+clan-tag-already-exists: "&cThis clan tag already exists."
+already-in-clan: "&cYou are already a member of a clan."
+clan-created: "&aYou successfully created a clan: &e[0] &7[&e[1]&7]"
+clan-not-found: "&cThis clan could not be found."
+clan-invite-closed: "&cThis clan does not allow any invites."
+invite-sent: "&aYou successfully sent a join request to &e[0]&a."
+clan-joined: "&aYou successfully joined the clan &e[0]&a."
+user-not-found: "&cUser not found."
+user-already-in-clan: "&cThis user is already a member of a clan."
+user-request-sent: "&aYou successfully sent a request to &e[0]&a."
+user-request-already-sent: "&cThis user already got a request."
+member-kicked: "&aYou successfully kicked &e[0]&a out of the clan."
+member-promoted: "&aYou successfully promoted &e[0] &ato &eMODERATOR&a."
+member-demoted: "&aYou successfully demoted &e[0] &ato &eMEMBER&a."
+request-accepted: "&aYou accepted the request of &e[0]&a."
+request-denied: "&cYou denied the request of &e[0]&a."
+request-already-sent: "&cYou have already sent a request to this clan."
+clan-deleted: "&aYou successfully deleted the clan &e[0]&a."
+clan-renamed: "&aYou successfully renamed the clan to &e[0] &7[&e[1]&7]&a."
+clan-invitesettings-changed: "&aYou successfully changed the clan invite settings to &e[0]&a."
+clan-left: "&aYou successfully left the clan."
+
+# --- Form UI ---
+
+back-button: "&8» &cBack"
+
+no-clan-menu-title: "Clan menu"
+no-clan-menu-content: "Create your own clan or join an existing clan."
+no-clan-create-clan: "&8» &aCreate clan"
+no-clan-join-clan: "&8» &eJoin clan"
+no-clan-clan-requests: "&8» &bInvite requests"
+
+clan-menu-title: "Clan dashboard"
+clan-menu-content: "&aClan&7: &e[0] &7[&e[1]&7]\n&aMembers&7: &e[2]"
+clan-menu-members: "&8» &9Members &7[&8[0]&7]"
+clan-menu-requests: "&8» &dJoin requests &7[&8[0]&7]"
+clan-menu-invite: "&8» &5Invite players"
+clan-menu-settings: "&8» &cSettings"
+clan-menu-leave: "&8» &4Leave"
+
+create-clan-menu-title: "Create new clan"
+create-clan-name-info: "&7Set the name of your clan. Amount of letters: < 25"
+create-clan-name-placeholder: "Name"
+create-clan-tag-info: "&7Set the tag of your clan. Amount of letters: < 4"
+create-clan-tag-placeholder: "Tag"
+create-clan-invite-settings: "&eINVITE: &7Players have to send an invite request.\n&eCLOSED: &7Players are not allowed to join this clan.\n&ePUBLIC: &7Players are allowed to join without an invite request."
+
+user-requests-menu-title: "Invite requests"
+user-requests-menu-content: "This is a list of all invitation of different clans."
+user-requests-list-button: "&8» &e[0] &7[&e[1]&7]"
+
+user-request-menu-title: "Request"
+user-request-menu-content: "Request"
+
+join-clan-menu-title: "Join a clan"
+join-clan-name-info: "&7Please provide the clan tag."
+join-clan-name-placeholder: "Tag"
+
+clan-invite-menu-title: "Invite players"
+clan-invite-player-info: "&7Invite an existing player to your clan."
+clan-invite-player-placeholder: "Player"
+
+clan-members-menu-title: "Clan members"
+clan-members-menu-content: "This is a list of all members of your current clan."
+clan-members-list-button: "&8» &e[0]\n&8- &7[1] &8-"
+
+clan-member-menu-title: "Member dashboard"
+clan-member-menu-content: "&7Member: &e[0]\n&7Role: &e[1]"
+clan-member-kick: "&8» &cKick member"
+clan-member-promote: "&8» &9Promote to moderator"
+clan-member-demote: "&8» &9Demote to member"
+
+clan-requests-menu-title: "Clan requests"
+clan-requests-menu-content: "This is a list of all invite requests of your clan."
+clan-requests-list-button: "&8» &e[0]"
+
+clan-request-menu-title: "Invite request"
+clan-request-menu-content: "&fShould &e[0] &fjoin your clan? Accept the request or deny it."
+clan-request-accept: "&8» &aAccept"
+clan-request-deny: "&8» &cDeny"
+
+clan-settings-menu-title: "Clan settings"
+clan-settings-menu-content: "Rename the clan or the clan tag, change invite settings or delete this clan."
+clan-settings-delete: "&8» &4Delete clan"
+clan-settings-rename: "&8» &9Rename clan"
+clan-settings-invite: "&8» &dChange invite settings"
+
+clan-delete-menu-title: "Delete clan"
+clan-delete-menu-content: "&cDo you want to delete this clan? Every clan member will be kicked. &c&lThis action cannot be undone."
+clan-delete-accept: "&8» &c&lDelete clan"
+
+clan-rename-menu-title: "Rename clan"
+
+clan-invitesettings-menu-title: "Change invite settings"

@@ -1,0 +1,6 @@
+name: ClanSystem
+version: 1.0.0-SNAPSHOT
+api: 1.0.0
+author: Mundschutziii
+main: net.lldv.clansystem.ClanSystem
+description: Create clans and build different camps
