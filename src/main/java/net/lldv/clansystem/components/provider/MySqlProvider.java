@@ -8,7 +8,6 @@ import net.lldv.clansystem.components.data.ClanPlayer;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -297,8 +296,12 @@ public class MySqlProvider extends Provider {
             if (resultSet.next()) {
                 String clan = resultSet.getString("CLAN");
                 String role = resultSet.getString("ROLE");
-                String[] requests = resultSet.getString("REQUESTS").split(":");
-                clanPlayer.accept(new ClanPlayer(player, Arrays.asList(requests), clan, role));
+                String[] rawRequests = resultSet.getString("REQUESTS").split(":");
+                List<String> requests = new ArrayList<>();
+                for (String s : rawRequests) {
+                    if (!s.isEmpty()) requests.add(s);
+                }
+                clanPlayer.accept(new ClanPlayer(player, requests, clan, role));
             }
             resultSet.close();
             preparedStatement.close();

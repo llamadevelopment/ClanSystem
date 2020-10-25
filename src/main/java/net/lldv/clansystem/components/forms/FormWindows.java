@@ -1,6 +1,7 @@
 package net.lldv.clansystem.components.forms;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
@@ -47,7 +48,7 @@ public class FormWindows {
                     form.addButton(new ElementButton(Language.getNP("clan-menu-leave")), e -> {
                         this.provider.leaveClan(clanPlayer);
                         player.sendMessage(Language.get("clan-left"));
-                        ClanSystemAPI.broadcastClanMessage(clan, Language.get("broadcast-member-left"));
+                        ClanSystemAPI.broadcastClanMessage(clan, Language.get("broadcast-member-left", player.getName()));
                     });
                 }
                 SimpleForm finalForm = form.build();
@@ -105,7 +106,7 @@ public class FormWindows {
                         player.sendMessage(Language.get("name-or-tag-empty"));
                         return;
                     }
-                    if (name.length() > 25 || tag.length() > 4) {
+                    if (name.length() > 25 || tag.length() > 5) {
                         player.sendMessage(Language.get("name-or-tag-too-long"));
                         return;
                     }
@@ -186,7 +187,9 @@ public class FormWindows {
                             return;
                         }
                         this.provider.createUserClanRequest(name, clan.getId());
-                        player.sendMessage(Language.get("user-request-sent"));
+                        player.sendMessage(Language.get("user-request-sent", name));
+                        Player player1 = Server.getInstance().getPlayer(name);
+                        if (player1 != null) player1.sendMessage(Language.get("new-clan-invite", clan.getTag()));
                     });
                 })
                 .build();
@@ -251,7 +254,11 @@ public class FormWindows {
                         return;
                     }
                     this.provider.joinClan(requester, clan);
+                    this.provider.deleteClanRequest(clan.getId(), requester);
                     player.sendMessage(Language.get("request-accepted", requester));
+                    Player player1 = Server.getInstance().getPlayer(requester);
+                    if (player1 != null) player1.sendMessage(Language.get("request-was-accepted", clan.getTag()));
+                    ClanSystemAPI.broadcastClanMessage(clan, Language.get("broadcast-member-joined", player.getName()));
                 })
                 .onNo(e -> {
                     this.provider.deleteClanRequest(clan.getId(), requester);
@@ -285,7 +292,7 @@ public class FormWindows {
                                     player.sendMessage(Language.get("name-or-tag-empty"));
                                     return;
                                 }
-                                if (name.length() > 25 || tag.length() > 4) {
+                                if (name.length() > 25 || tag.length() > 5) {
                                     player.sendMessage(Language.get("name-or-tag-too-long"));
                                     return;
                                 }

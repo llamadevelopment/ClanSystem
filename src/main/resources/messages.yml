@@ -30,6 +30,8 @@ clan-left: "&aYou successfully left the clan."
 broadcast-member-joined: "&e[0] &ajoined the clan."
 broadcast-member-left: "&e[0] &cleft the clan."
 broadcast-invite-request: "&e[0] &acreated a join request."
+request-was-accepted: "&aThe clan &e[0] &ahas accepted your request. You are now a member of this clan."
+new-clan-invite: "&aThe clan &e[0] &ahas invited you to their clan. Accept or deny it with &e/clan&a."
 
 # --- Form UI ---
 
@@ -50,11 +52,11 @@ clan-menu-settings: "&8» &cSettings"
 clan-menu-leave: "&8» &4Leave"
 
 create-clan-menu-title: "Create new clan"
-create-clan-name-info: "&7Set the name of your clan. Amount of letters: < 25"
+create-clan-name-info: "&fSet the name of your clan. Amount of letters: =< 25"
 create-clan-name-placeholder: "Name"
-create-clan-tag-info: "&7Set the tag of your clan. Amount of letters: < 4"
+create-clan-tag-info: "&fSet the tag of your clan. Amount of letters: =< 5"
 create-clan-tag-placeholder: "Tag"
-create-clan-invite-settings: "&eINVITE: &7Players have to send an invite request.\n&eCLOSED: &7Players are not allowed to join this clan.\n&ePUBLIC: &7Players are allowed to join without an invite request."
+create-clan-invite-settings: "&eINVITE: &fPlayers have to send an invite request.\n&eCLOSED: &fPlayers are not allowed to join this clan.\n&ePUBLIC: &fPlayers are allowed to join without an invite request."
 
 user-requests-menu-title: "Invite requests"
 user-requests-menu-content: "This is a list of all invitation of different clans."
