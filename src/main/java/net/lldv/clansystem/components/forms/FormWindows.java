@@ -28,7 +28,7 @@ public class FormWindows {
                 SimpleForm form = new SimpleForm.Builder(Language.getNP("no-clan-menu-title"), Language.getNP("no-clan-menu-content"))
                         .addButton(new ElementButton(Language.getNP("no-clan-create-clan")), this::openCreateClan)
                         .addButton(new ElementButton(Language.getNP("no-clan-join-clan")), this::openJoinClan)
-                        .addButton(new ElementButton(Language.getNP("no-clan-clan-requests")), e -> this.openClanRequests(player, clanPlayer))
+                        .addButton(new ElementButton(Language.getNP("no-clan-clan-requests", clanPlayer.getRequests().size())), e -> this.openClanRequests(player, clanPlayer))
                         .build();
                 form.send(player);
             });
@@ -43,8 +43,10 @@ public class FormWindows {
                 if (clanPlayer.getRole().equals("LEADER")) {
                     form.addButton(new ElementButton(Language.getNP("clan-menu-settings")), e -> this.openClanSettings(player, clan));
                 } else {
-                    form.addButton(new ElementButton(Language.getNP("clan-menu-leave")), e -> this.provider.leaveClan(clanPlayer));
-                    player.sendMessage(Language.get("clan-left"));
+                    form.addButton(new ElementButton(Language.getNP("clan-menu-leave")), e -> {
+                        this.provider.leaveClan(clanPlayer);
+                        player.sendMessage(Language.get("clan-left"));
+                    });
                 }
                 SimpleForm finalForm = form.build();
                 finalForm.send(player);
@@ -54,32 +56,34 @@ public class FormWindows {
 
     public void openClanRequests(Player player, ClanPlayer clanPlayer) {
         SimpleForm.Builder form = new SimpleForm.Builder(Language.getNP("user-requests-menu-title"), Language.getNP("user-requests-menu-content"));
-        clanPlayer.getRequests().forEach(requests -> this.provider.getClan(requests, clan -> {
-            form.addButton(new ElementButton(Language.getNP("user-requests-list-button", clan.getName(), clan.getTag())), e -> this.openClanRequest(player, clan));
-        }));
+        if (clanPlayer.getRequests() != null && !clanPlayer.getRequests().toString().equals("")) {
+            clanPlayer.getRequests().forEach(requests -> this.provider.getClan(requests, clan -> {
+                form.addButton(new ElementButton(Language.getNP("user-requests-list-button", clan.getName(), clan.getTag())), e -> this.openClanRequest(player, clan));
+            }));
+        }
         form.addButton(new ElementButton(Language.getNP("back-button")), this::openClanMenu);
         SimpleForm finalForm = form.build();
         finalForm.send(player);
     }
 
-    // TODO: define messages
     public void openClanRequest(Player player, Clan clan) {
         SimpleForm form = new SimpleForm.Builder(Language.getNP("user-request-menu-title"), Language.getNP("user-request-menu-content", clan.getName(), clan.getTag(), clan.getMembers().size()))
                 .addButton(new ElementButton(Language.getNP("user-request-accept")), e -> {
                     if (this.provider.playerIsInClan(player.getName())) {
-                        player.sendMessage("");
+                        player.sendMessage(Language.get("already-in-clan"));
                         return;
                     }
                     if (!this.provider.clanNameExists(clan.getName())) {
-                        player.sendMessage("");
+                        player.sendMessage(Language.get("clan-not-found"));
                         return;
                     }
                     this.provider.joinClan(player.getName(), clan);
-                    player.sendMessage("");
+                    this.provider.deleteUserClanRequest(player.getName(), clan.getId());
+                    player.sendMessage(Language.get("request-accepted", clan.getTag()));
                 })
                 .addButton(new ElementButton(Language.getNP("user-request-deny")), e -> {
                     this.provider.deleteUserClanRequest(player.getName(), clan.getId());
-                    player.sendMessage("");
+                    player.sendMessage(Language.get("request-denied", clan.getTag()));
                 })
                 .addButton(new ElementButton(Language.getNP("back-button")), this::openClanMenu)
                 .build();
@@ -185,7 +189,9 @@ public class FormWindows {
 
     public void openClanMembers(Player player, Clan clan) {
         SimpleForm.Builder form = new SimpleForm.Builder(Language.getNP("clan-members-menu-title"), Language.getNP("clan-members-menu-content"));
-        clan.getMembers().forEach(clanPlayer -> form.addButton(new ElementButton(Language.getNP("clan-members-list-button", clanPlayer.getPlayer(), clanPlayer.getRole())), e -> this.openClanMember(player, clanPlayer)));
+        if (clan.getRequests() != null && !clan.getRequests().toString().equals("")) {
+            clan.getMembers().forEach(clanPlayer -> form.addButton(new ElementButton(Language.getNP("clan-members-list-button", clanPlayer.getPlayer(), clanPlayer.getRole())), e -> this.openClanMember(player, clanPlayer)));
+        }
         form.addButton(new ElementButton(Language.getNP("back-button")), this::openClanMenu);
         SimpleForm finalForm = form.build();
         finalForm.send(player);
@@ -202,7 +208,7 @@ public class FormWindows {
                     });
                 }
             }
-            if (viewer.getRole().equals("LEADER")) {
+            if (viewer.getRole().equals("LEADER") && !clanPlayer.getRole().equals("LEADER")) {
                 if (clanPlayer.getRole().equals("MEMBER")) {
                     form.addButton(new ElementButton(Language.getNP("clan-member-promote")), e -> {
                         this.provider.changeClanRank(clanPlayer, Clan.ClanRole.MODERATOR);
