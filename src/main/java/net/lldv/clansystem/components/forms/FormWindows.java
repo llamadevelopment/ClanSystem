@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
+import net.lldv.clansystem.components.api.ClanSystemAPI;
 import net.lldv.clansystem.components.data.Clan;
 import net.lldv.clansystem.components.data.ClanPlayer;
 import net.lldv.clansystem.components.forms.custom.CustomForm;
@@ -46,6 +47,7 @@ public class FormWindows {
                     form.addButton(new ElementButton(Language.getNP("clan-menu-leave")), e -> {
                         this.provider.leaveClan(clanPlayer);
                         player.sendMessage(Language.get("clan-left"));
+                        ClanSystemAPI.broadcastClanMessage(clan, Language.get("broadcast-member-left"));
                     });
                 }
                 SimpleForm finalForm = form.build();
@@ -80,6 +82,7 @@ public class FormWindows {
                     this.provider.joinClan(player.getName(), clan);
                     this.provider.deleteUserClanRequest(player.getName(), clan.getId());
                     player.sendMessage(Language.get("request-accepted", clan.getTag()));
+                    ClanSystemAPI.broadcastClanMessage(clan, Language.get("broadcast-member-joined", player.getName()));
                 })
                 .addButton(new ElementButton(Language.getNP("user-request-deny")), e -> {
                     this.provider.deleteUserClanRequest(player.getName(), clan.getId());
@@ -150,10 +153,13 @@ public class FormWindows {
                         }
                         if (clan.getInviteSettings() == Clan.InviteSettings.INVITE) {
                             this.provider.createJoinClanRequest(player.getName(), clan.getId());
+                            ClanSystemAPI.broadcastClanMessage(clan, Clan.ClanRole.LEADER, Language.get("broadcast-invite-request", player.getName()));
+                            ClanSystemAPI.broadcastClanMessage(clan, Clan.ClanRole.MODERATOR, Language.get("broadcast-invite-request", player.getName()));
                             player.sendMessage(Language.get("invite-sent", tag));
                             return;
                         }
                         this.provider.joinClan(player.getName(), clan);
+                        ClanSystemAPI.broadcastClanMessage(clan, Language.get("broadcast-member-joined", player.getName()));
                         player.sendMessage(Language.get("clan-joined", tag));
                     });
                 })

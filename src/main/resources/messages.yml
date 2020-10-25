@@ -27,6 +27,9 @@ clan-deleted: "&aYou successfully deleted the clan &e[0]&a."
 clan-renamed: "&aYou successfully renamed the clan to &e[0] &7[&e[1]&7]&a."
 clan-invitesettings-changed: "&aYou successfully changed the clan invite settings to &e[0]&a."
 clan-left: "&aYou successfully left the clan."
+broadcast-member-joined: "&e[0] &ajoined the clan."
+broadcast-member-left: "&e[0] &cleft the clan."
+broadcast-invite-request: "&e[0] &acreated a join request."
 
 # --- Form UI ---
 
